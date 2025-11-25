@@ -8,7 +8,7 @@ Volume=/home/jeffiscow/srv/volumes/pangolin/config/traefik:/etc/traefik:ro,z
 Volume=/home/jeffiscow/srv/volumes/pangolin/config/letsencrypt:/letsencrypt:z
 Volume=/home/jeffiscow/srv/volumes/pangolin/config/traefik/logs:/var/log/traefik:z
 Volume=pangolin-data:/var/certificates
-Volume=pangolin-data:/var/dynamix
+Volume=pangolin-data:/var/dynamic
 
 [Service]
 Restart=always

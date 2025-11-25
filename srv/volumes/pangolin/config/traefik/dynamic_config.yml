@@ -45,4 +45,4 @@ http:
     api-service:
       loadBalancer:
         servers:
-          - url: "http://pangolin:3000"   # API/WebSocket server
+          - url: "http://pangolin:3001"   # API/WebSocket server
