@@ -1,0 +1,19 @@
+[Unit]
+Description=Gerbil
+
+[Container]
+Pod=proxy.pod
+ContainerName=gerbil
+AddCapability=NET_ADMIN SYS_MODULE
+Image=docker.io/fosrl/gerbil:latest
+Volume=/home/jeffiscow/srv/volumes/pangolin/config:/var/config:z
+Exec='--reachableAt=http://gerbil:3003' \
+     '--generateAndSaveKeyTo=/var/config/key' \
+     '--remoteConfig=http://pangolin:3001/api/v1/'
+AutoUpdate=registry
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

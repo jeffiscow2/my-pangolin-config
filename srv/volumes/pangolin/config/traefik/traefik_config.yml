@@ -1,0 +1,31 @@
+api:
+  insecure: true
+  dashboard: true
+
+log:
+  level: INFO
+  format: common
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+    http:
+      tls:
+        certResolver: letsencrypt
+
+providers:
+  http:
+    endpoint: "http://pangolin:3001/api/v1/traefik-config"
+    pollInterval: "5s"
+  file:
+    filename: "/etc/traefik/dynamic_config.yml"
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: "jeffiscow@jeffiscow.xyz"
+      storage: "/letsencrypt/acme.json"
+      httpChallenge:
+        entryPoint: web

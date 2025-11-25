@@ -1,0 +1,18 @@
+app:
+  dashboard_url: "https://golin.jefftube.stream"
+
+domains:
+  domain1:
+    base_domain: "golin.jefftube.stream"
+    cert_resolver: "letsencrypt"
+
+server:
+  secret: /run/secrets/my_secret
+
+gerbil:
+  base_endpoint: "golin.jefftube.stream"
+
+flags:
+  require_email_verification: false
+  disable_signup_without_invite: true
+  disable_user_create_org: true

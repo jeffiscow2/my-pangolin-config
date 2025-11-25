@@ -1,0 +1,48 @@
+http:
+  middlewares:
+    redirect-to-https:
+      redirectScheme:
+        scheme: https
+
+  routers:
+    redirect:
+      rule: "Host(`golin.jefftube.stream`)"
+      entryPoints:
+        - web
+      middlewares:
+        - redirect-to-https
+      service: next-service
+
+    next-router:
+      rule: "Host(`golin.jefftube.stream`) && !PathPrefix(`/api/v1`)"
+      entryPoints:
+        - websecure
+      service: next-service
+      tls:
+        certResolver: letsencrypt
+
+    api-router:
+      rule: "Host(`golin.jefftube.stream`) && PathPrefix(`/api/v1`)"
+      entryPoints:
+        - websecure
+      service: api-service
+      tls:
+        certResolver: letsencrypt
+
+    ws-router:
+      rule: "Host(`golin.jefftube.stream`)"
+      entryPoints:
+        - websecure
+      service: api-service
+      tls:
+        certResolver: letsencrypt
+
+  services:
+    next-service:
+      loadBalancer:
+        servers:
+          - url: "http://pangolin:3002"   # Next.js server
+    api-service:
+      loadBalancer:
+        servers:
+          - url: "http://pangolin:3000"   # API/WebSocket server

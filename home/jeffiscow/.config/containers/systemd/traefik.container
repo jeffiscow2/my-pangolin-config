@@ -1,0 +1,17 @@
+[Container]
+Pod=proxy.pod
+AutoUpdate=registry
+ContainerName=traefik
+Exec='--configFile=/etc/traefik/traefik_config.yml'
+Image=docker.io/traefik
+Volume=/home/jeffiscow/srv/volumes/pangolin/config/traefik:/etc/traefik:ro,z
+Volume=/home/jeffiscow/srv/volumes/pangolin/config/letsencrypt:/letsencrypt:z
+Volume=/home/jeffiscow/srv/volumes/pangolin/config/traefik/logs:/var/log/traefik:z
+Volume=pangolin-data:/var/certificates
+Volume=pangolin-data:/var/dynamix
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

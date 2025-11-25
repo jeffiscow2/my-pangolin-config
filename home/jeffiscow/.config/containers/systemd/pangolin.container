@@ -1,0 +1,23 @@
+[Unit]
+Description=Pangolin
+
+[Container]
+Pod=proxy.pod
+ContainerName=pangolin
+Image=docker.io/fosrl/pangolin:latest
+Volume=/home/jeffiscow/srv/volumes/pangolin/config:/app/config:z
+Volume=pangolin-data:/var/certificates
+Volume=pangolin-data:/var/dynamic
+Notify=healthy
+HealthCmd="/usr/bin/curl -f http://localhost:3001/api/v1/"
+HealthInterval=3s
+HealthRetries=15
+HealthTimeout=15s
+AutoUpdate=registry
+RunFlags=--secret=my_secret
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
